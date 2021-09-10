@@ -1,12 +1,11 @@
 <template>
   <div class="app-main-layout">
-  <sidebar />
-  <navbar />
+    <navbar @click-sidebar="isOpen = !isOpen" />
+    <sidebar :value="isOpen" />
 
-    <main class="app-content">
+    <main class="app-content" :class="{ full: !isOpen }">
       <div class="app-page">
-      <router-view />
-      
+        <router-view />
       </div>
     </main>
 
@@ -19,14 +18,17 @@
 </template>
 
 <script>
-import Navbar from "../components/app/Navbar.vue"
-import Sidebar from "../components/app/Sidebar.vue"
+import Navbar from "../components/app/Navbar.vue";
+import Sidebar from "../components/app/Sidebar.vue";
 
 export default {
   name: "main-layout",
-  components:{
+  data: () => ({
+    isOpen: true,
+  }),
+  components: {
     Navbar,
-    Sidebar
-  }
-}
+    Sidebar,
+  },
+};
 </script>
