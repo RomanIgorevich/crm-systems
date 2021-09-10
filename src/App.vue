@@ -1,17 +1,29 @@
 <template>
   <div>
-    <div>
-      <router-link to="/">Главная</router-link>
-      <router-link to="/v2">Ссылка 2</router-link>
-    </div>
-    <div>
+    <component :is="layout">
       <router-view />
-    </div>
+    </component>
   </div>
 </template>
 
 <script>
+import EmptyLayout from "./layouts/EmptyLayout.vue";
+import MainLayout from "./layouts/MainLayout.vue";
+
 export default {
   name: "App",
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || "empty") + "-layout";
+    },
+  },
+  components: {
+    EmptyLayout,
+    MainLayout,
+  },
 };
 </script>
+
+<style lang="scss">
+@import "~materialize-css/dist/css/materialize.min.css";
+</style>
